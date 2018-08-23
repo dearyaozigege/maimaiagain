@@ -38,9 +38,10 @@
                 <div id="menu2" class="nav-box menuhd">
                     <ul>
                         <li class="index">
-                            <a href="#" class="">
-                                <span class="out" style="top: 0px;">首页</span>
-                            </a>
+                            <!-- <a href="#" class=""> -->
+                              <router-link to="/index"><span class="out" style="top: 0px;">首页</span></router-link>
+                                
+                            <!-- </a> -->
                         </li>
                         <li class="news">
                             <a href="#" class="">
@@ -63,7 +64,8 @@
                             </a>
                         </li>
                         <li class="goods">
-                            <a href="" class="router-link-exact-active ">
+                            <a href="" class="">   
+                              <!-- active样式清除 -->
                                 <span class="out" style="top: 0px;">购物商城</span>
                             </a>
                         </li>
@@ -80,6 +82,9 @@
             </div>
         </div>
     </div>
+
+<!-- 组件的出口 -->
+<router-view></router-view>
 
     <!-- 项目底部 -->
     <div class="footer">
@@ -120,11 +125,44 @@
 
 
 export default {
-  name: "app",
-
+  name: "header",
 };
+
+// 导包
+import $ from 'jquery';
+// 引入jquery插件  为a标签增加两个用于动画的span
+$(document).ready(function() {
+	$("#menu2 li a").wrapInner( '<span class="out"></span>' );
+	$("#menu2 li a").each(function() {
+		$( '<span class="over">' +  $(this).text() + '</span>' ).appendTo( this );
+	});
+
+	$("#menu2 li a").hover(function() {
+		$(".out",	this).stop().animate({'top':	'48px'},	300); // move down - hide
+		$(".over",	this).stop().animate({'top':	'0px'},		300); // move down - show
+
+	}, function() {
+		$(".out",	this).stop().animate({'top':	'0px'},		300); // move up - show
+		$(".over",	this).stop().animate({'top':	'-48px'},	300); // move up - hide
+	});
+
+});
 </script>
 
 <style>
+/* 引入头尾部分的css样式*/
 @import url('./assets/statics/site/css/style.css');
+/* 引入插件儿Jquery的css样式*/
+@import url('./assets/lib/css/style.css');
+/* 清除导航栏背景蓝色图片 */
+#menu2 {
+  background-image: none;
+}
+
+/* 设置背景为透明色 */
+body {
+  background-color:transparent;
+}
+
+
 </style>
