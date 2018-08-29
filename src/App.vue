@@ -130,7 +130,7 @@ export default {
 
 // 导包
 import $ from 'jquery';
-// 引入jquery插件  为a标签增加两个用于动画的span
+// 引入jquery插件  为头部部分的a标签增加两个用于动画的span
 $(document).ready(function() {
 	$("#menu2 li a").wrapInner( '<span class="out"></span>' );
 	$("#menu2 li a").each(function() {
